@@ -1,5 +1,5 @@
 create table Auctions (
-    id INTEGER NOT NULL,
+    id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
     shortDesc VARCHAR(40) NOT NULL,
     description VARCHAR(256) NOT NULL,
@@ -10,7 +10,7 @@ create table Auctions (
 );
 
 create table User (
-    id INTEGER NOT NULL,
+    id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
     surname VARCHAR(20) NOT NULL,
     username VARCHAR(20) NOT NULL,
@@ -20,6 +20,15 @@ create table User (
 
     primary key (id)
 
+);
+
+create table Admin
+(
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    username VARCHAR(20) NOT NULL,
+
+    primary key (id),
+    foreign key (id) references user (id)
 );
 
 
