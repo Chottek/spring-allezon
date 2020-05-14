@@ -2,6 +2,7 @@ package pl.fox.allezon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.fox.allezon.model.Auction;
 import pl.fox.allezon.service.AuctionService;
@@ -19,7 +20,7 @@ public class AuctionController {
         this.service = service;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Auction> getAllAuctions(){
         return service.getAllAuctions();
     }
@@ -28,6 +29,11 @@ public class AuctionController {
     @ResponseStatus(HttpStatus.OK)
     public void create(@RequestBody Auction a){
         service.saveAuction(a);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteUser(@PathVariable Integer id) {
+        service.deleteAuction(id);
     }
 
 }

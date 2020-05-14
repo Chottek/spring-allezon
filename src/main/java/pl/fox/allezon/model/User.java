@@ -1,7 +1,10 @@
 package pl.fox.allezon.model;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,11 +15,11 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Timestamp birthdate;
+    private int role;
+    private Date birthdate;
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -76,12 +79,22 @@ public class User {
     }
 
     @Basic
+    @Column(name = "role")
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    @Basic
     @Column(name = "birthdate")
-    public Timestamp getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Timestamp birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -91,6 +104,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
+                role == user.role &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(surname, user.surname) &&
                 Objects.equals(username, user.username) &&
@@ -101,6 +115,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, username, email, password, birthdate);
+        return Objects.hash(id, name, surname, username, email, password, role, birthdate);
     }
 }
