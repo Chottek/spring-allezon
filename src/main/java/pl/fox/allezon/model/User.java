@@ -1,9 +1,6 @@
 package pl.fox.allezon.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -14,6 +11,7 @@ public class User {
     private String surname;
     private String username;
     private String email;
+    private String password;
     private Timestamp birthdate;
 
     @Id
@@ -67,6 +65,16 @@ public class User {
     }
 
     @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Basic
     @Column(name = "birthdate")
     public Timestamp getBirthdate() {
         return birthdate;
@@ -86,11 +94,12 @@ public class User {
                 Objects.equals(surname, user.surname) &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
                 Objects.equals(birthdate, user.birthdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, username, email, birthdate);
+        return Objects.hash(id, name, surname, username, email, password, birthdate);
     }
 }
