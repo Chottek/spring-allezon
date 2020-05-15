@@ -1,5 +1,7 @@
 package pl.fox.allezon.model;
 
+import lombok.ToString;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import java.sql.Date;
 import java.util.Objects;
 
+@ToString
 @Entity
 public class User {
     private int id;

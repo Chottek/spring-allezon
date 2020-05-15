@@ -1,8 +1,11 @@
 package pl.fox.allezon.model;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@ToString
 @Entity
 public class Auction {
     private int id;
