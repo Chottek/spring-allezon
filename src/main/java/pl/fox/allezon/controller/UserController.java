@@ -30,6 +30,9 @@ public class UserController {
         return service.getUsers();
     }
 
+    @GetMapping(value = "/get")
+    public User getById(@RequestParam Integer id) { return service.getById(id); }
+
     @DeleteMapping(value = "/{id}")
     public void deleteUser(@PathVariable Integer id) {
         service.deleteUser(id);

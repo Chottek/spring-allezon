@@ -33,13 +33,16 @@ public class UserService {
         var bcrypt = new BCryptPasswordEncoder();
         u.setPassword(bcrypt.encode(u.getPassword()));
         repository.save(u);
-
         LOG.info(LOG_COLOR + "Saved {}" + ConsoleColors.RESET, u.toString());
     }
 
     public void deleteUser(Integer id) {
        repository.deleteById(id);
        LOG.info(LOG_COLOR + "Deleted User with id {}" + ConsoleColors.RESET, id);
+    }
+
+    public User getById(Integer id){
+        return repository.getOne(id);
     }
 
     @PostConstruct
