@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.fox.allezon.model.Auction;
+import pl.fox.allezon.model.User;
 import pl.fox.allezon.repository.AuctionRepository;
 import pl.fox.allezon.utils.ConsoleColors;
 
@@ -26,6 +27,10 @@ public class AuctionService {
 
     public List<Auction> getAllAuctions() {
         return repository.findAll();
+    }
+
+    public Auction getById(Integer id){
+        return repository.getOne(id);
     }
 
     public void saveAuction(Auction a) {

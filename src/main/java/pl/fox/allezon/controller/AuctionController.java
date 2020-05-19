@@ -24,6 +24,9 @@ public class AuctionController {
         return service.getAllAuctions();
     }
 
+    @GetMapping(value = "/get")
+    public Auction getById(@RequestParam Integer id) { return service.getById(id); }
+
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void create(@RequestBody Auction a){

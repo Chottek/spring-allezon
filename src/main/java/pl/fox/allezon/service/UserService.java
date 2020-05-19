@@ -29,6 +29,19 @@ public class UserService {
         return repository.findAll();
     }
 
+    public void loginUser(String username, String password){
+        if(repository.getByName(username) != null){
+            var bcrypt = new BCryptPasswordEncoder();
+            User u = repository.getByName(username);
+            if(bcrypt.matches(password, u.getPassword())){
+                LOG.info("User {} logged in!", u.getUsername());
+            }else{
+                LOG.info("Invalid user or password!");
+            }
+        }
+
+    }
+
     public void saveUser(User u){
         var bcrypt = new BCryptPasswordEncoder();
         u.setPassword(bcrypt.encode(u.getPassword()));
