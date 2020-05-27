@@ -1,7 +1,8 @@
 package pl.fox.allezon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.fox.allezon.model.User;
 import pl.fox.allezon.service.UserService;
@@ -20,9 +21,10 @@ public class UserController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void create(@RequestBody User u) {
+//   @ResponseStatus(HttpStatus. OK)
+    public ResponseEntity<?> create(@RequestBody User u) {
         service.saveUser(u);
+        return ResponseEntity.ok("ALLES GUT!");
     }
 
     @GetMapping
@@ -30,8 +32,17 @@ public class UserController {
         return service.getUsers();
     }
 
-//    @PostMapping("/login")
-//    public void login() { return service.loginUser(); }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Object o) {
+        HttpHeaders headers = new HttpHeaders();
+        if(service.loginUser(o)){
+            headers.add("Responded", "UserController");
+            return ResponseEntity.ok().headers(headers).body("Logged In successfuly!");
+        }
+
+        headers.add("Invalid", "BAD");
+        return ResponseEntity.badRequest().headers(headers).body("Invalid mail or password!");
+    }
 
     @GetMapping(value = "/get")
     public User getById(@RequestParam Integer id) { return service.getById(id); }

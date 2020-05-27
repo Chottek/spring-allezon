@@ -8,7 +8,7 @@ import pl.fox.allezon.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query("select t from User t where t.username=?1")
-    User getByName(String username);
+    @Query("select t from User t where t.email=?1")
+    User getByMail(String email);
 
 }
